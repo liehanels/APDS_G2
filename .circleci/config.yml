@@ -7,7 +7,6 @@ jobs:
     working_directory: ~/build
     resource_class: small
     steps:
-      - run: find .
       - attach_workspace:
           at: ~/workspace
       - run: |

@@ -2,9 +2,9 @@ version: 2.1
 
 jobs:
   sonarqube:
+    working_directory: ~/build
     docker:
       - image: sonarsource/sonar-scanner-cli
-    working_directory: ~/build
     resource_class: small
     steps:
       - attach_workspace:

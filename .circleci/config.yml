@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   sonarqube:
     docker:
-      - image: cimg/openjdk:17.0[_{{{CITATION{{{_2{cimg/openjdk - CircleCI](https://circleci.com/developer/images/image/cimg/openjdk)
+      - image: sonarsource/sonar-scanner-cli
     working_directory: ~/build
     steps:
       - run:
@@ -13,13 +13,6 @@ jobs:
       - run: find .
       - attach_workspace:
           at: ~/workspace
-      - run:
-          name: Install SonarScanner
-          command: |
-            sudo apt-get install -y wget unzip
-            wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
-            unzip sonar-scanner-cli-4.6.2.2472-linux.zip
-            export PATH=$PATH:$(pwd)/sonar-scanner-4.6.2.2472-linux/bin
       - run: |
           export PATH=$PATH:$(pwd)/sonar-scanner-4.6.2.2472-linux/bin
           SONAR_BRANCH="${CIRCLE_BRANCH:-master}"
@@ -33,7 +26,6 @@ jobs:
             -Dsonar.login="$SONAR_TOKEN" \
             -Dsonar.branch.name="$SONAR_BRANCH" \
             -Dsonar.sources="."
-
 workflows:
   version: 2
   build_and_scan:

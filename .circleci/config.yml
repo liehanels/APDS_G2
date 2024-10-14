@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   sonarqube:
     docker:
-      - image: circleci/openjdk:17.0-jdk
+      - image: cimg/openjdk:17.0[_{{{CITATION{{{_2{cimg/openjdk - CircleCI](https://circleci.com/developer/images/image/cimg/openjdk)
     working_directory: ~/build
     steps:
       - run:
